@@ -6,7 +6,7 @@ const formComponent = `
     </form>
 `;
 
-function loadEvent(){
+async function  loadEvent() {
     const rootElement = document.getElementById("root");
     rootElement.insertAdjacentHTML(`beforebegin`, formComponent);
 
@@ -25,7 +25,6 @@ function loadEvent(){
             body : formData
         };
 
-        // fetch data
         fetch(`/`, fetchSettings)
             .then( (data) => {
                 if (data.status == 200) {
@@ -38,6 +37,21 @@ function loadEvent(){
                 console.dir(error);
             });
 
+        // fetch data
+        // try{
+        //     // fetch data with post request
+        //     const fethcedData = fetch(`/`, fetchSettings);
+        //     let responsedData = fethcedData((data) => {
+        //         if (data.status == 200) {
+        //             event.target.outerHTML = "Done";
+        //             console.dir(data);
+        //         }
+        //     });
+        //     console.dir("responseData: " + responsedData);
+        // } catch(error){
+        //         event.target.outerHTML = `Error`;
+        //         console.dir(error);
+        // };
     });
 }
 
