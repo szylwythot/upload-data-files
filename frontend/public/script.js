@@ -15,6 +15,7 @@ function loadEvent(){
         event.preventDefault();
         console.dir(event);
 
+        // create formdata
         const formData = new FormData();
         formData.append(`title`, event.target.querySelector(`input[name="title"]`.value));
         formData.append(`picture`, event.target.querySelector(`input[name="picture"]`).files[0]); // ez bájtokat fog megadni
@@ -24,6 +25,7 @@ function loadEvent(){
             body : formData
         };
 
+        // fetch data
         fetch(`/`, fetchSettings)
             .then( (data) => {
                 if (data.status == 200) {
