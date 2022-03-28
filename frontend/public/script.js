@@ -14,8 +14,29 @@ function loadEvent(){
     formElement.addEventListener(`submit`, (event) => {
         event.preventDefault();
         console.dir(event);
-    })
-    // console.log("hello");
+
+        const formData = new FormData();
+        formData.append(`title`, event.target.querySelector(`input[name="title"]`.value));
+        formData.append(`picture`, event.target.querySelector(`input[name="picture"]`).files[0]); // ez bájtokat fog megadni
+
+        const fetchSettings = {
+            method : `POST`,
+            body : formData
+        };
+
+        fetch(`/`, fetchSettings)
+            .then( (data) => {
+                if (data.status == 200) {
+                    event.target.outerHTML = "Done";
+                    console.dir(data);
+                }
+            })
+            .catch(error => {
+                event.target.outerHTML = `Error`;
+                console.dir(error);
+            });
+
+    });
 }
 
 window.addEventListener(`load`, loadEvent);
